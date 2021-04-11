@@ -43,6 +43,7 @@ namespace Moonrider {
             s.moveAmount = Mathf.Clamp01(Mathf.Abs(s.horizontal) + Mathf.Abs(s.vertical));
 
             retVal = HandleAttacking();
+            
 
             return retVal;
         }
@@ -52,7 +53,7 @@ namespace Moonrider {
 
             if (Rb || Rt || Lb || Lt)
             {
-                isAttacking = true;
+                //isAttacking = true;
             }
 
             // Here we can place a logic that interrupts attack
@@ -72,5 +73,7 @@ namespace Moonrider {
             return isAttacking;
 
         }
+
+      
     }
 }

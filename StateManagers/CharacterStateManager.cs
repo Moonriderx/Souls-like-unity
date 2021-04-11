@@ -15,6 +15,7 @@ namespace Moonrider {
         public float vertical;
         public float horizontal;
         public bool lockOn;
+        public float delta;
 
         public override void Init()
         {

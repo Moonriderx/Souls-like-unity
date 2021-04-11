@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +14,26 @@ namespace Moonrider {
         public float moveAmount;
         public Vector3 rotateDirection;
 
-        public string locomotionId = "locomotion";
-        public string attackStateId = "attackState";
+        [Header("States")]
+        public bool isGrounded;
+
+        [Header("References")]
+        public new Transform camera;
+
+
+        [Header("Movement Stats")]
+        public float frontRayOffset = .5f;
+        public float movementSpeed = 1;
+        public float adaptSpeed = 1;
+        public float rotationSpeed = 10;
+
+        [HideInInspector]
+        public LayerMask ignoreForGroundCheck;
+
+        [HideInInspector]
+        public const string locomotionId = "locomotion";
+        [HideInInspector]
+        public const string attackStateId = "attackState";
         public override void Init()
         {
             base.Init();
@@ -24,10 +41,13 @@ namespace Moonrider {
             State locomotion = new State(
                 new List<StateAction>() // FixedUpdate
                 {
-                    new InputManager(this),
+                    
+                    new MovePlayerCharacter(this),
+
                 },
                 new List<StateAction>() // Update
                 {
+                    new InputManager(this),
                 },
                 new List<StateAction>() // LateUpdate
                 {
@@ -51,16 +71,22 @@ namespace Moonrider {
 
             ChangeState(locomotionId);
 
+            ignoreForGroundCheck = ~(1 << 9 | 1 << 10);
+
 
         }
 
         private void FixedUpdate()
         {
+            delta = Time.fixedDeltaTime;
+
             base.FixedTick();
         }
 
         private void Update()
         {
+            delta = Time.deltaTime;
+
             base.Tick();
         }
 
@@ -71,67 +97,3 @@ namespace Moonrider {
 
     }
 }
-=======
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-namespace Moonrider {
-
-    public class PlayerStateManager : CharacterStateManager // all the logic for states in main player will be placed here
-        // because the CharacterStateManager already implements the init we don't have to new Init. 
-    {
-
-        public override void Init()
-        {
-            base.Init();
-
-            State locomotion = new State(
-                new List<StateAction>() // FixedUpdate
-                {
-                },
-                new List<StateAction>() // Update
-                {
-                },
-                new List<StateAction>() // LateUpdate
-                {
-                }
-                );
-
-            State attackState = new State(
-               new List<StateAction>() // FixedUpdate
-                {
-               },
-               new List<StateAction>() // Update
-                {
-               },
-               new List<StateAction>() // LateUpdate
-                {
-               }
-               );
-
-            RegisterState("locomotion", locomotion);
-            RegisterState("attackState", attackState);
-
-            ChangeState("locomotion");
-
-
-        }
-
-        private void FixedUpdate()
-        {
-            base.FixedTick();
-        }
-
-        private void Update()
-        {
-            base.Tick();
-        }
-
-        private void LateUpdate()
-        {
-            base.LateTick();
-        }
-
-    }
-}
->>>>>>> f4397c712eb74e6fe255b617b1f9b747e7f69ffa
