@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46c503bad8c61098f55441a656c03ef0eb163dc6
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +31,7 @@ namespace Moonrider {
         public float adaptSpeed = 1;
         public float rotationSpeed = 10;
 
+<<<<<<< HEAD
         [HideInInspector]
         public LayerMask ignoreForGroundCheck;
 
@@ -97,3 +102,18 @@ namespace Moonrider {
 
     }
 }
+=======
+        private void Update()
+        {
+            base.Tick();
+        }
+
+        private void LateUpdate()
+        {
+            base.LateTick();
+        }
+
+    }
+}
+
+>>>>>>> 46c503bad8c61098f55441a656c03ef0eb163dc6
