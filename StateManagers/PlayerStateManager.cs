@@ -7,6 +7,15 @@ namespace Moonrider {
         // because the CharacterStateManager already implements the init we don't have to new Init. 
     {
 
+
+        [Header("Inputs")]
+        public float mouseX;
+        public float mouseY;
+        public float moveAmount;
+        public Vector3 rotateDirection;
+
+        public string locomotionId = "locomotion";
+        public string attackStateId = "attackState";
         public override void Init()
         {
             base.Init();
@@ -14,6 +23,7 @@ namespace Moonrider {
             State locomotion = new State(
                 new List<StateAction>() // FixedUpdate
                 {
+                    new InputManager(this),
                 },
                 new List<StateAction>() // Update
                 {
@@ -22,6 +32,40 @@ namespace Moonrider {
                 {
                 }
                 );
+
+            State attackState = new State(
+               new List<StateAction>() // FixedUpdate
+                {
+               },
+               new List<StateAction>() // Update
+                {
+               },
+               new List<StateAction>() // LateUpdate
+                {
+               }
+               );
+
+            RegisterState(locomotionId, locomotion);
+            RegisterState(attackStateId, attackState);
+
+            ChangeState(locomotionId);
+
+
+        }
+
+        private void FixedUpdate()
+        {
+            base.FixedTick();
+        }
+
+        private void Update()
+        {
+            base.Tick();
+        }
+
+        private void LateUpdate()
+        {
+            base.LateTick();
         }
 
     }
