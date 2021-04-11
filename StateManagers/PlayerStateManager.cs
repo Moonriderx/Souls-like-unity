@@ -22,6 +22,40 @@ namespace Moonrider {
                 {
                 }
                 );
+
+            State attackState = new State(
+               new List<StateAction>() // FixedUpdate
+                {
+               },
+               new List<StateAction>() // Update
+                {
+               },
+               new List<StateAction>() // LateUpdate
+                {
+               }
+               );
+
+            RegisterState("locomotion", locomotion);
+            RegisterState("attackState", attackState);
+
+            ChangeState("locomotion");
+
+
+        }
+
+        private void FixedUpdate()
+        {
+            base.FixedTick();
+        }
+
+        private void Update()
+        {
+            base.Tick();
+        }
+
+        private void LateUpdate()
+        {
+            base.LateTick();
         }
 
     }
