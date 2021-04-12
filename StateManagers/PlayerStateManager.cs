@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-=======
 using System.Collections;
->>>>>>> e195a96d37de54ef986d4f9ca4aee51c3fe4e707
 using System.Collections.Generic;
 using UnityEngine;
 namespace Moonrider {
@@ -102,7 +98,6 @@ namespace Moonrider {
             base.LateTick();
         }
 
-<<<<<<< HEAD
 
         #region State Events
         void DisableRootMotion()
@@ -118,7 +113,5 @@ namespace Moonrider {
         #endregion
 
 
-=======
->>>>>>> e195a96d37de54ef986d4f9ca4aee51c3fe4e707
     }
 }
