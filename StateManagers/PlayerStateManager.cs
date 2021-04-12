@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 46c503bad8c61098f55441a656c03ef0eb163dc6
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +13,7 @@ namespace Moonrider {
         public float mouseY;
         public float moveAmount;
         public Vector3 rotateDirection;
-
-        [Header("States")]
-        public bool isGrounded;
+       
 
         [Header("References")]
         public new Transform camera;
@@ -31,14 +25,13 @@ namespace Moonrider {
         public float adaptSpeed = 1;
         public float rotationSpeed = 10;
 
-<<<<<<< HEAD
         [HideInInspector]
         public LayerMask ignoreForGroundCheck;
 
         [HideInInspector]
-        public const string locomotionId = "locomotion";
+        public  string locomotionId = "locomotion";
         [HideInInspector]
-        public const string attackStateId = "attackState";
+        public  string attackStateId = "attackState";
         public override void Init()
         {
             base.Init();
@@ -59,17 +52,22 @@ namespace Moonrider {
                 }
                 );
 
+            locomotion.onEnter = DisableRootMotion;
+
             State attackState = new State(
                new List<StateAction>() // FixedUpdate
-                {
+               {
                },
                new List<StateAction>() // Update
                 {
+                   new MonitorInteractingAnimation(this, "isInteracting" ,locomotionId),
                },
                new List<StateAction>() // LateUpdate
-                {
+               {
                }
                );
+
+            attackState.onEnter = EnableRootMotion;
 
             RegisterState(locomotionId, locomotion);
             RegisterState(attackStateId, attackState);
@@ -100,20 +98,20 @@ namespace Moonrider {
             base.LateTick();
         }
 
-    }
-}
-=======
-        private void Update()
+
+        #region State Events
+        void DisableRootMotion()
         {
-            base.Tick();
+            useRootMotion = false;
         }
 
-        private void LateUpdate()
+        void EnableRootMotion()
         {
-            base.LateTick();
+            useRootMotion = true;
         }
+
+        #endregion
+
 
     }
 }
-
->>>>>>> 46c503bad8c61098f55441a656c03ef0eb163dc6

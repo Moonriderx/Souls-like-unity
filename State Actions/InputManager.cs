@@ -19,6 +19,7 @@ namespace Moonrider {
         public override bool Execute()
         {
             bool retVal = false;
+            isAttacking = false;
 
             s.horizontal = Input.GetAxis("Horizontal");
             s.vertical = Input.GetAxis("Vertical");
@@ -51,9 +52,9 @@ namespace Moonrider {
         bool HandleAttacking()
         {
 
-            if (Rb || Rt || Lb || Lt)
+            if (Rb || Rt || Lb || Lt || Input.GetKey(KeyCode.Mouse0))
             {
-                //isAttacking = true;
+                isAttacking = true;
             }
 
             // Here we can place a logic that interrupts attack
@@ -67,8 +68,8 @@ namespace Moonrider {
             {
                 // find the actual animations from the items etc...
                 //Then play animation
-                //s.PlayTargetAnimations("");
-                //s.ChangeState(s.attackStateId);
+                s.PlayTargetAnimations("Attack 1", true);
+                s.ChangeState(s.attackStateId);
             }
             return isAttacking;
 

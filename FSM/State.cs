@@ -10,6 +10,9 @@ namespace Moonrider {
         List<StateAction> updateActions;
         List<StateAction> LateUpdateActions;
 
+        public delegate void OnEnter();
+        public OnEnter onEnter;
+
         public State(List<StateAction> fixedUpdateActions, List<StateAction> updateActions, List<StateAction> lateUpdateActions)
         {
             this.fixedUpdateActions = fixedUpdateActions;

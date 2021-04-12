@@ -58,8 +58,8 @@ namespace Moonrider
             }
 
             State targetState = GetState(targetId); // run on enter actions
-
             currentState = targetState;
+            currentState.onEnter?.Invoke(); // if currentState onEnter is not null, -> invoke
         }
 
         State GetState(string targetId)
