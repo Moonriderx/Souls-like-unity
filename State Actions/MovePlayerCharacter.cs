@@ -87,6 +87,16 @@ namespace Moonrider {
 
         void HandleRotation()
         {
+           if (states.target) // if there is a target asigned 
+            {
+                Vector3 dir = states.target.position - states.mTransform.position; // Creating a direction 
+                dir.Normalize();
+                dir.y = 0;
+                states.mTransform.rotation = Quaternion.LookRotation(dir); // hardcoding the rotation of the camera
+
+                return;
+            }
+
             float h = states.horizontal;
             float v = states.vertical;
 
@@ -96,12 +106,12 @@ namespace Moonrider {
 
             targetDir.y = 0;
             if (targetDir == Vector3.zero)
+            {
                 targetDir = states.mTransform.forward;
+            }
 
             Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(
-                states.mTransform.rotation, tr,
-                states.delta * states.moveAmount * states.rotationSpeed);
+            Quaternion targetRotation = Quaternion.Slerp(states.mTransform.rotation, tr, states.delta * states.moveAmount * states.rotationSpeed);
 
             states.mTransform.rotation = targetRotation;
         }
