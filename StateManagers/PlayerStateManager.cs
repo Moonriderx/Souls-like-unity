@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
+=======
+using System.Collections;
+>>>>>>> 9afc7dc63f17d1c598731af49327e59185b8c7d3
 using System.Collections.Generic;
 using UnityEngine;
 namespace Moonrider {
